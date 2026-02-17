@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading...</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #b8f2e6, #aed9ff);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #0f4c5c;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 14px;
+    background: white;
+    color: #0f4c5c;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.07);
+}
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 320px;
+    transition: 0.3s ease;
+}
+
+.popup.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup h2 {
+    margin-bottom: 15px;
+    color: #0f4c5c;
+}
+
+.popup p {
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>มีอะไรบางอย่าง 🤍</h1>
+
+<button onclick="showFirst()">ลองกดดูสิ</button>
+
+<div id="overlay" onclick="closeAll()"></div>
+
+<!-- Popup 1 (หลอก) -->
+<div class="popup" id="popup1">
+    <h2>แฮร่ 😜</h2>
+    <p>ยังไม่ใช่อันนี้ ลองอีกทีได้ไหม</p>
+    <button onclick="goSecond()">โอเคๆ</button>
+</div>
+
+<!-- Popup 2 (ของจริง) -->
+<div class="popup" id="popup2">
+    <h2>อันนี้แหละ 💙</h2>
+    <p>ตั้งใจเลือกเพลงให้เลยนะ</p>
+    <button onclick="openSong()">กดฟังเพลง</button>
+</div>
+
+<script>
+function showFirst(){
+    document.getElementById("overlay").style.display = "block";
+    let p1 = document.getElementById("popup1");
+    p1.style.display = "block";
+    setTimeout(()=>{ p1.classList.add("show"); },50);
+}
+
+function goSecond(){
+    let p1 = document.getElementById("popup1");
+    p1.classList.remove("show");
+    setTimeout(()=>{
+        p1.style.display = "none";
+        let p2 = document.getElementById("popup2");
+        p2.style.display = "block";
+        setTimeout(()=>{ p2.classList.add("show"); },50);
+    },300);
+}
+
+function closeAll(){
+    document.getElementById("overlay").style.display = "none";
+    let p1 = document.getElementById("popup1");
+    let p2 = document.getElementById("popup2");
+    p1.classList.remove("show");
+    p2.classList.remove("show");
+    setTimeout(()=>{
+        p1.style.display = "none";
+        p2.style.display = "none";
+    },300);
+}
+
+function openSong(){
+    window.open("https://www.youtube.com/watch?v=gg_6eVaw52o", "_blank");
+}
+</script>
+
+</body>
+</html>
